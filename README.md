@@ -1,7 +1,8 @@
 # CPU Affinity Manager
 
+> sourcecode from uid185415@bilibili.com
+
 Windows CPU 亲和性管理工具 — 自由控制哪个进程跑在哪些核心上。
-sourcecode from bilibili@uid185415
 
 ## 它能做什么
 
