@@ -1,0 +1,186 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CpuAffinityManager.Avalonia.App"
+             xmlns:local="using:CpuAffinityManager.Avalonia"
+             RequestedThemeVariant="Default">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://CpuAffinityManager.Avalonia/Assets/Colors.axaml"/>
+                <ResourceInclude Source="avares://CpuAffinityManager.Avalonia/Assets/Strings.en-US.axaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+
+        <!-- ═══════════════════════════════════════
+             Card — white bg, rounded, shadow, border
+             ═══════════════════════════════════════ -->
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BoxShadow" Value="{StaticResource ShadowSm}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.card:pointerover">
+            <Setter Property="BoxShadow" Value="{StaticResource ShadowMd}"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             Primary Button — indigo bg, white text, rounded
+             ═══════════════════════════════════════ -->
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextOnPrimaryBrush}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Button.primary:pointerover">
+            <Setter Property="Background" Value="{StaticResource PrimaryDarkBrush}"/>
+        </Style>
+        <Style Selector="Button.primary:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             Outline Button — transparent, indigo border
+             ═══════════════════════════════════════ -->
+        <Style Selector="Button.outline">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryLightBrush}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Button.outline:pointerover">
+            <Setter Property="Background" Value="{StaticResource PrimaryBgBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             Ghost Button — transparent, subtle hover
+             ═══════════════════════════════════════ -->
+        <Style Selector="Button.ghost">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="10,6"/>
+        </Style>
+        <Style Selector="Button.ghost:pointerover">
+            <Setter Property="Background" Value="{StaticResource SurfacePressedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             Danger Button
+             ═══════════════════════════════════════ -->
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Button.danger:pointerover">
+            <Setter Property="Background" Value="{StaticResource DangerHoverBrush}"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             Sidebar Nav Buttons
+             ═══════════════════════════════════════ -->
+        <Style Selector="Button.nav">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+        <Style Selector="Button.nav:pointerover">
+            <Setter Property="Background" Value="{StaticResource SidebarHoverBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextOnDarkBrush}"/>
+        </Style>
+        <Style Selector="Button.nav.nav-selected">
+            <Setter Property="Background" Value="{StaticResource SidebarActiveBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextOnPrimaryBrush}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             Process List Row
+             ═══════════════════════════════════════ -->
+        <Style Selector="Border.process-row">
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>
+        </Style>
+        <Style Selector="Border.process-row:pointerover">
+            <Setter Property="Background" Value="{StaticResource SurfaceHoverBrush}"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             Tag / Badge Styles
+             ═══════════════════════════════════════ -->
+        <Style Selector="Border.tag">
+            <Setter Property="Background" Value="{StaticResource PrimaryBgBrush}"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="10,3"/>
+        </Style>
+        <Style Selector="Border.tag-danger">
+            <Setter Property="Background" Value="{StaticResource DangerBgBrush}"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="10,3"/>
+        </Style>
+        <Style Selector="Border.tag-warning">
+            <Setter Property="Background" Value="{StaticResource WarningBgBrush}"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="10,3"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             TextBox — rounded, subtle border
+             ═══════════════════════════════════════ -->
+        <Style Selector="TextBox.modern">
+            <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="10,8"/>
+        </Style>
+        <Style Selector="TextBox.modern:focus">
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+        </Style>
+
+        <!-- ═══════════════════════════════════════
+             Sidebar CPU Info Footer
+             ═══════════════════════════════════════ -->
+        <Style Selector="Border.sidebar-footer">
+            <Setter Property="Background" Value="{StaticResource SidebarHoverBrush}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14,12"/>
+            <Setter Property="Margin" Value="8,0,8,12"/>
+        </Style>
+
+    </Application.Styles>
+</Application>

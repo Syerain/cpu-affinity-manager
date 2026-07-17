@@ -1,0 +1,94 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CpuAffinityManager.Avalonia.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="700"
+             x:Class="CpuAffinityManager.Avalonia.Views.ProcessListView"
+             x:DataType="vm:ProcessListViewModel"
+             x:CompileBindings="True">
+
+    <Grid RowDefinitions="Auto,*" IsEnabled="{Binding !IsLoading}">
+        <!-- Search & Filter Bar -->
+        <Border Grid.Row="0" Classes.card="True" Padding="12">
+            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                <TextBox Watermark="{DynamicResource Loc.SearchProcesses}" Text="{Binding SearchText}" FontSize="13"/>
+                <ComboBox Grid.Column="1" Width="140"
+                          ItemsSource="{x:Static vm:ProcessListViewModel.FilterModes}"
+                          SelectedItem="{Binding FilterMode}"/>
+                <Button Grid.Column="2" Content="{DynamicResource Loc.Refresh}" Classes.ghost="True"
+                        Command="{Binding RefreshCommand}"/>
+            </Grid>
+        </Border>
+
+        <!-- Process List -->
+        <Border Grid.Row="1" Classes.card="True" Padding="0" ClipToBounds="True">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding Processes}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:ProcessItem">
+                            <Border Classes.process-row="True" Padding="12,8">
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="{DynamicResource Loc.SetPCores}"
+                                                  Command="{Binding $parent[UserControl].DataContext.SetAffinityPCoresCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                        <MenuItem Header="{DynamicResource Loc.SetECores}"
+                                                  Command="{Binding $parent[UserControl].DataContext.SetAffinityECoresCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                        <MenuItem Header="{DynamicResource Loc.SetAllCores}"
+                                                  Command="{Binding $parent[UserControl].DataContext.SetAffinityAllCoresCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                        <MenuItem Header="-"/>
+                                        <MenuItem Header="{DynamicResource Loc.SetFirstHalf}"
+                                                  Command="{Binding $parent[UserControl].DataContext.SetAffinityFirstHalfCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                        <MenuItem Header="{DynamicResource Loc.SetSecondHalf}"
+                                                  Command="{Binding $parent[UserControl].DataContext.SetAffinitySecondHalfCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                        <MenuItem Header="-"/>
+                                        <MenuItem Header="{DynamicResource Loc.JobEnforced}"
+                                                  Command="{Binding $parent[UserControl].DataContext.SetJobEnforcedCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                        <MenuItem Header="{DynamicResource Loc.JobLocked}"
+                                                  Command="{Binding $parent[UserControl].DataContext.SetJobLockedCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                        <MenuItem Header="-"/>
+                                        <MenuItem Header="{DynamicResource Loc.ApplyMatchedRule}"
+                                                  Command="{Binding $parent[UserControl].DataContext.ApplyMatchedRuleCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+                                <Grid ColumnDefinitions="Auto,*,Auto,160">
+                                    <Border Grid.Column="0" Width="36" Height="36" CornerRadius="8"
+                                            Background="{StaticResource PrimaryBgBrush}" Margin="0,0,12,0">
+                                        <TextBlock Text="⚙" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                        <TextBlock Text="{Binding Name}" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{StaticResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Text="{Binding Path}" FontSize="11"
+                                                   Foreground="{StaticResource TextMutedBrush}" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                    <Border Grid.Column="2" VerticalAlignment="Center" CornerRadius="10"
+                                            Padding="8,2" Margin="0,0,12,0"
+                                            Background="{StaticResource PrimaryBgBrush}"
+                                            IsVisible="{Binding MatchedRule, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                                        <TextBlock Text="{Binding MatchedRule}" FontSize="10" FontWeight="SemiBold"
+                                                   Foreground="{StaticResource PrimaryBrush}"/>
+                                    </Border>
+                                    <StackPanel Grid.Column="3" VerticalAlignment="Center" Spacing="2">
+                                        <TextBlock FontSize="11" Foreground="{StaticResource TextSecondaryBrush}">
+                                            <Run Text="{DynamicResource Loc.Pid}"/><Run Text=" "/><Run Text="{Binding Pid}"/>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Affinity}" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

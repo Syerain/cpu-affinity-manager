@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "id": "rule-001",
+      "name": "D盘游戏绑定大核",
+      "enabled": true,
+      "match": { "process": "*.exe", "path": "D:\\Games\\**", "exclude": ["*launcher*.exe", "*crash*.exe"] },
+      "action": { "type": "cpu-affinity", "mode": "p-cores|all-cores", "level": "job-enforced", "customMask": null, "socketIndex": null, "cpuPriority": "high", "lock": false }
+    },
+    {
+      "id": "rule-002",
+      "name": "后台更新程序用小核",
+      "enabled": true,
+      "match": { "process": "update*.exe|setup*.exe|*indexer*.exe", "path": "**", "exclude": null },
+      "action": { "type": "cpu-affinity", "mode": "e-cores|second-half", "level": "soft-cpu-sets", "customMask": null, "socketIndex": null, "cpuPriority": null, "lock": false }
+    },
+    {
+      "id": "rule-003",
+      "name": "CPU-Z 强制使用小核",
+      "enabled": true,
+      "match": { "process": "cpuz*.exe|cpu-z*.exe", "path": null, "exclude": null },
+      "action": { "type": "cpu-affinity", "mode": "e-cores|second-half", "level": "job-locked", "customMask": null, "socketIndex": null, "cpuPriority": null, "lock": true }
+    },
+    {
+      "id": "rule-004",
+      "name": "系统服务前一半核心",
+      "enabled": true,
+      "match": { "process": "svchost.exe|lsass.exe", "path": "C:\\Windows\\**", "exclude": null },
+      "action": { "type": "cpu-affinity", "mode": "custom", "level": "hard-affinity", "customMask": "0xFF", "socketIndex": null, "cpuPriority": null, "lock": false }
+    },
+    {
+      "id": "rule-005",
+      "name": "数据库用大核(无大核则前一半)",
+      "enabled": true,
+      "match": { "process": "sqlservr.exe|mysqld.exe|postgres.exe", "path": "**", "exclude": null },
+      "action": { "type": "cpu-affinity", "mode": "p-cores|first-half", "level": "hard-affinity", "customMask": null, "socketIndex": null, "cpuPriority": null, "lock": false }
+    }
+  ],
+  "settings": { "enableWmiMonitor": true, "confirmBeforeApply": false, "minimizeToTray": true }
+}

@@ -1,0 +1,58 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CpuAffinityManager.Avalonia.ViewModels"
+        x:Class="CpuAffinityManager.Avalonia.Views.RuleEditorWindow"
+        Title="{DynamicResource Loc.RuleEditor}" Width="520" Height="520"
+        CanResize="False" WindowStartupLocation="CenterOwner"
+        x:CompileBindings="True">
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="24" Background="{StaticResource BgBrush}">
+        <!-- Title -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
+            <TextBlock x:Name="DlgTitle" Text="{DynamicResource Loc.AddRule}" FontSize="20" FontWeight="SemiBold"
+                       Foreground="{StaticResource TextPrimaryBrush}"/>
+        </StackPanel>
+
+        <!-- Fields -->
+        <StackPanel Grid.Row="1" Spacing="10">
+            <StackPanel Spacing="2">
+                <TextBlock Text="{DynamicResource Loc.RuleName}" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBox x:Name="TxtName" FontSize="13"/>
+            </StackPanel>
+            <StackPanel Spacing="2">
+                <TextBlock Text="{DynamicResource Loc.ProcessPattern}" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBox x:Name="TxtProcess" FontSize="13"/>
+            </StackPanel>
+            <StackPanel Spacing="2">
+                <TextBlock Text="{DynamicResource Loc.PathPattern}" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBox x:Name="TxtPath" FontSize="13"/>
+            </StackPanel>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <StackPanel Grid.Column="0" Spacing="2">
+                    <TextBlock Text="{DynamicResource Loc.AffinityMode}" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <ComboBox x:Name="CmbMode" SelectedIndex="0">
+                        <ComboBoxItem>all-cores</ComboBoxItem><ComboBoxItem>p-cores</ComboBoxItem>
+                        <ComboBoxItem>e-cores</ComboBoxItem><ComboBoxItem>p-cores-smt</ComboBoxItem>
+                        <ComboBoxItem>p-cores-no-smt</ComboBoxItem><ComboBoxItem>first-half</ComboBoxItem>
+                        <ComboBoxItem>second-half</ComboBoxItem><ComboBoxItem>custom</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Spacing="2">
+                    <TextBlock Text="{DynamicResource Loc.EnforcementLevel}" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <ComboBox x:Name="CmbLevel" SelectedIndex="1">
+                        <ComboBoxItem>soft-cpu-sets</ComboBoxItem><ComboBoxItem>hard-affinity</ComboBoxItem>
+                        <ComboBoxItem>job-enforced</ComboBoxItem><ComboBoxItem>job-locked</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+            <CheckBox x:Name="ChkEnabled" IsChecked="True" Content="{DynamicResource Loc.Enabled}"/>
+            <CheckBox x:Name="ChkLock" Content="{DynamicResource Loc.LockBreakaway}"/>
+        </StackPanel>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" Margin="0,16,0,0">
+            <Button Content="{DynamicResource Loc.Cancel}" Classes.outline="True" Click="Cancel_Click"/>
+            <Button x:Name="BtnSave" Content="{DynamicResource Loc.SaveRule}" Classes.primary="True" Click="Save_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

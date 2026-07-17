@@ -1,0 +1,95 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ═══════════════════════════════════
+         Color Palette — matches WPF ModernTheme
+         ═══════════════════════════════════ -->
+
+    <!-- Primary / Accent -->
+    <Color x:Key="PrimaryColor">#6366F1</Color>
+    <Color x:Key="PrimaryDarkColor">#4F46E5</Color>
+    <Color x:Key="PrimaryLightColor">#A5B4FC</Color>
+    <Color x:Key="PrimaryBgColor">#EEF2FF</Color>
+
+    <!-- Surfaces -->
+    <Color x:Key="BgColor">#F1F5F9</Color>
+    <Color x:Key="SurfaceColor">#FFFFFF</Color>
+    <Color x:Key="SurfaceHoverColor">#F8FAFC</Color>
+    <Color x:Key="SurfacePressedColor">#F1F5F9</Color>
+    <Color x:Key="SidebarBgColor">#1E293B</Color>
+    <Color x:Key="SidebarHoverColor">#334155</Color>
+    <Color x:Key="SidebarActiveColor">#6366F1</Color>
+
+    <!-- Text -->
+    <Color x:Key="TextPrimaryColor">#1E293B</Color>
+    <Color x:Key="TextSecondaryColor">#64748B</Color>
+    <Color x:Key="TextMutedColor">#94A3B8</Color>
+    <Color x:Key="TextOnDarkColor">#F1F5F9</Color>
+    <Color x:Key="TextOnPrimaryColor">#FFFFFF</Color>
+
+    <!-- Borders & Dividers -->
+    <Color x:Key="BorderColor">#E2E8F0</Color>
+    <Color x:Key="DividerColor">#F1F5F9</Color>
+
+    <!-- Semantic -->
+    <Color x:Key="SuccessColor">#10B981</Color>
+    <Color x:Key="WarningColor">#F59E0B</Color>
+    <Color x:Key="DangerColor">#EF4444</Color>
+    <Color x:Key="InfoColor">#3B82F6</Color>
+
+    <!-- CPU Core Types -->
+    <Color x:Key="PcoreColor">#EF4444</Color>
+    <Color x:Key="PcoreSmtColor">#F97316</Color>
+    <Color x:Key="EcoreColor">#3B82F6</Color>
+
+    <!-- Enforcement Levels -->
+    <Color x:Key="JobLockedColor">#991B1B</Color>
+    <Color x:Key="JobEnforcedColor">#DC2626</Color>
+    <Color x:Key="HardAffinityColor">#C2410C</Color>
+    <Color x:Key="SoftCpuSetColor">#1D4ED8</Color>
+
+    <!-- ═══════════════════════════════════
+         Solid Brushes — use these in bindings
+         ═══════════════════════════════════ -->
+
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+    <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource PrimaryDarkColor}"/>
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLightColor}"/>
+    <SolidColorBrush x:Key="PrimaryBgBrush" Color="{StaticResource PrimaryBgColor}"/>
+
+    <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="SurfaceHoverBrush" Color="{StaticResource SurfaceHoverColor}"/>
+    <SolidColorBrush x:Key="SurfacePressedBrush" Color="{StaticResource SurfacePressedColor}"/>
+    <SolidColorBrush x:Key="SidebarBgBrush" Color="{StaticResource SidebarBgColor}"/>
+    <SolidColorBrush x:Key="SidebarHoverBrush" Color="{StaticResource SidebarHoverColor}"/>
+    <SolidColorBrush x:Key="SidebarActiveBrush" Color="{StaticResource SidebarActiveColor}"/>
+
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}"/>
+    <SolidColorBrush x:Key="TextMutedBrush" Color="{StaticResource TextMutedColor}"/>
+    <SolidColorBrush x:Key="TextOnDarkBrush" Color="{StaticResource TextOnDarkColor}"/>
+    <SolidColorBrush x:Key="TextOnPrimaryBrush" Color="{StaticResource TextOnPrimaryColor}"/>
+
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
+    <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}"/>
+
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource InfoColor}"/>
+
+    <SolidColorBrush x:Key="PcoreBrush" Color="{StaticResource PcoreColor}"/>
+    <SolidColorBrush x:Key="PcoreSmtBrush" Color="{StaticResource PcoreSmtColor}"/>
+    <SolidColorBrush x:Key="EcoreBrush" Color="{StaticResource EcoreColor}"/>
+    <SolidColorBrush x:Key="DangerHoverBrush" Color="{StaticResource JobEnforcedColor}"/>
+    <SolidColorBrush x:Key="DangerBgBrush" Color="#FEE2E2"/>
+    <SolidColorBrush x:Key="WarningBgBrush" Color="#FEF3C7"/>
+
+    <!-- ═══════════════════════════════════
+         Card shadows (via BoxShadow)
+         ═══════════════════════════════════ -->
+
+    <BoxShadows x:Key="ShadowSm">0 1 4 #1E293B14</BoxShadows>
+    <BoxShadows x:Key="ShadowMd">0 2 12 #1E293B1A</BoxShadows>
+</ResourceDictionary>

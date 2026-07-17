@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CpuAffinityManager.Avalonia.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="700"
+             x:Class="CpuAffinityManager.Avalonia.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel"
+             x:CompileBindings="True">
+
+    <ScrollViewer>
+        <StackPanel Spacing="12">
+
+            <!-- Monitoring -->
+            <Border Classes.card="True" Padding="20">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="{DynamicResource Loc.Monitoring}" FontSize="16" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                    <ToggleSwitch IsChecked="{Binding EnableWmiMonitor}"
+                                  OffContent="{DynamicResource Loc.WmiDisabled}"
+                                  OnContent="{DynamicResource Loc.WmiEnabled}"/>
+                    <ToggleSwitch IsChecked="{Binding ConfirmBeforeApply}"
+                                  OffContent="{DynamicResource Loc.ApplyWithoutConfirmation}"
+                                  OnContent="{DynamicResource Loc.ConfirmApply}"/>
+                    <ToggleSwitch IsChecked="{Binding MinimizeToTray}"
+                                  OffContent="{DynamicResource Loc.CloseToExit}"
+                                  OnContent="{DynamicResource Loc.MinimizeToTray}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Appearance -->
+            <Border Classes.card="True" Padding="20">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="{DynamicResource Loc.Appearance}" FontSize="16" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                    <Grid ColumnDefinitions="100,*">
+                        <TextBlock Text="{DynamicResource Loc.Theme}" VerticalAlignment="Center"
+                                   FontSize="13"
+                                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                        <ComboBox Grid.Column="1" Width="200"
+                                  ItemsSource="{x:Static vm:SettingsViewModel.ThemeOptions}"
+                                  SelectedIndex="{Binding SelectedThemeIndex}"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="100,*">
+                        <TextBlock Text="{DynamicResource Loc.Language}" VerticalAlignment="Center"
+                                   FontSize="13" Foreground="{StaticResource TextSecondaryBrush}"/>
+                        <ComboBox Grid.Column="1" Width="200"
+                                  ItemsSource="{x:Static vm:SettingsViewModel.LanguageOptions}"
+                                  SelectedIndex="{Binding SelectedLanguageIndex}"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- About -->
+            <Border Classes.card="True" Padding="20">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="{DynamicResource Loc.About}" FontSize="16" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                    <TextBlock FontSize="13"
+                               Foreground="{StaticResource TextSecondaryBrush}">
+                        <Run Text="{DynamicResource Loc.AppTitle}"/><Run Text=" "/>
+                        <Run Text="{Binding AppVersion}"/>
+                    </TextBlock>
+                    <TextBlock Text="{DynamicResource Loc.BuiltWith}"
+                               FontSize="12"
+                               Foreground="{StaticResource TextMutedBrush}"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
